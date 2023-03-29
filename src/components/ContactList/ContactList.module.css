@@ -1,0 +1,13 @@
+.button {
+  margin-left: 15px;
+}
+
+li:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+li {
+  max-width: 300px;
+  display: flex;
+  justify-content: space-between;
+}
