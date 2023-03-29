@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
@@ -9,14 +10,26 @@ export default function App() {
   });
   const [filter, setFilter] = useState('');
 
-  const onFormSubmit = (name, number, id) => {
-    contacts.forEach(contact => {
+  const onFormSubmit = (name, number) => {
+    if (JSON.parse(localStorage.getItem('contacts')).length === 0) {
+      setContacts(state => [
+        ...state,
+        { name: name, number: number, id: nanoid() },
+      ]);
+    }
+
+    for (const contact of contacts) {
       if (contact.name.toLowerCase() === name.toLowerCase()) {
         alert(`${contact.name} is alerady in Contacts`);
-        return;
+        break;
       }
-      setContacts(state => [...state, { name: name, number: number, id: id }]);
-    });
+      setContacts(state => [
+        ...state,
+        { name: name, number: number, id: nanoid() },
+      ]);
+    }
+
+    // });
   };
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));

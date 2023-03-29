@@ -1,22 +1,20 @@
-import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import css from './ContactForm.module.css';
 
 export default function ContactForm({ onFormSubmit }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const [id, setId] = useState('');
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
     switch (name) {
       case 'name':
         setName(value);
-        setId(nanoid());
+
         break;
       case 'number':
         setNumber(value);
-        setId(nanoid());
+
         break;
 
       default:
@@ -27,10 +25,9 @@ export default function ContactForm({ onFormSubmit }) {
 
   const handleSubmit = e => {
     e.preventDefault();
-    onFormSubmit(name, number, id);
+    onFormSubmit(name, number);
     setName('');
     setNumber('');
-    setId('');
   };
 
   return (
