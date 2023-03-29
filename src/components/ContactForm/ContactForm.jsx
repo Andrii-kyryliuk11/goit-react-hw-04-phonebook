@@ -30,6 +30,7 @@ export default function ContactForm({ onFormSubmit }) {
     onFormSubmit(name, number, id);
     setName('');
     setNumber('');
+    setId('');
   };
 
   return (

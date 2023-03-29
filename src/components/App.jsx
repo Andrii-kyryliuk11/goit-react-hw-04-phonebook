@@ -11,15 +11,13 @@ export default function App() {
 
   const onFormSubmit = (name, number, id) => {
     contacts.forEach(contact => {
-      contact.name.toLowerCase() === name.toLowerCase()
-        ? alert(`${name} is alerady in Contacts`)
-        : setContacts(state => [
-            ...state,
-            { name: name, number: number, id: id },
-          ]);
+      if (contact.name.toLowerCase() === name.toLowerCase()) {
+        alert(`${contact.name} is alerady in Contacts`);
+        return;
+      }
+      setContacts(state => [...state, { name: name, number: number, id: id }]);
     });
   };
-
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
